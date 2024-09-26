@@ -21,3 +21,4 @@ public class Stock implements Serializable {
     @OneToMany(mappedBy = "stock")
     Set<Product> products;
 }
+// aaa
