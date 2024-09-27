@@ -26,3 +26,4 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 	void updateInvoice(Long id);
 	
 }
+// aaa
