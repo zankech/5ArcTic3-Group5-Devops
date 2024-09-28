@@ -7,3 +7,4 @@ import tn.esprit.devops_project.entities.Operator;
 public interface OperatorRepository extends CrudRepository<Operator, Long> {
 
 }
+// aaa
