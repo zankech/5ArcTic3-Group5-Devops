@@ -27,6 +27,7 @@ public class Supplier implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long idSupplier;
+	Long test;
 	String code;
 	String label;
 	@Enumerated(EnumType.STRING)
