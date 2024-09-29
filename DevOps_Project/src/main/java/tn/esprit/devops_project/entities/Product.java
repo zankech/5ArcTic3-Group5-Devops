@@ -18,6 +18,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idProduct;
     String title;
+    String test;
     float price;
     int quantity;
     @Enumerated(EnumType.STRING)
