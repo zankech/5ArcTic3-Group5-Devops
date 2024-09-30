@@ -1,11 +1,12 @@
 pipeline {
     agent any
-
+    
     environment {
-        // Append Maven to the PATH environment variable
-        PATH+EXTRA = "/usr/share/maven/bin"
+        // Set the Maven home and append it to the PATH variable
+        MAVEN_HOME = "/usr/share/maven"
+        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
     }
-
+    
     stages {
         stage('Clone Repository') {
             steps {
