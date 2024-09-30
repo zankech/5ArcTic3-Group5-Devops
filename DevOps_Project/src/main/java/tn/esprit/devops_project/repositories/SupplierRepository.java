@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import tn.esprit.devops_project.entities.Supplier;
 
 public interface SupplierRepository extends JpaRepository<Supplier, Long> {
-//aaa
+//aaaa
 }
