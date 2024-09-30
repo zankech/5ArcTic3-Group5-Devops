@@ -1,33 +1,44 @@
 pipeline {
     agent any
+
+    environment {
+        // Append Maven to the PATH environment variable
+        PATH+EXTRA = "/usr/share/maven/bin"
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'ahmed2', url: 'https://github.com/zankech/project.git'
+                // Clone the Git repository
+                git branch: 'main', url: 'https://github.com/zankech/project.git'
             }
         }
         stage('Build') {
             steps {
-                sh './mvnw clean package'  // Adjust this command if using regular Maven (mvn) or Gradle
+                // Build the project using Maven
+                sh 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
-                sh './mvnw test'
+                // Run tests using Maven
+                sh 'mvn test'
             }
         }
         stage('Deploy') {
             steps {
+                // Placeholder for deployment steps
                 echo 'Deploying application...'
-                // You can add deploy steps here
             }
         }
     }
     post {
         success {
+            // Actions to take upon success
             echo 'Pipeline succeeded!'
         }
         failure {
+            // Actions to take upon failure
             echo 'Pipeline failed!'
         }
     }
