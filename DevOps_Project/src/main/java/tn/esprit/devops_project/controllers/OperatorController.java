@@ -37,6 +37,7 @@ public class OperatorController {
 	public Operator modifyOperateur(@RequestBody Operator operator) {
 		return operatorService.updateOperator(operator);
 	}
-
+  
+// aaa
 	
 }
