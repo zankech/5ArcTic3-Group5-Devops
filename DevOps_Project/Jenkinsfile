@@ -2,35 +2,36 @@ pipeline {
     agent any
 
     environment {
-        SHELL = '/bin/bash'
         M2_HOME = "/usr/share/maven"
         PATH = "${M2_HOME}/bin:${env.PATH}"
-        HOME = "/var/lib/jenkins"
-        MAVEN_OPTS = "-Dmaven.repo.local=/var/lib/jenkins/.m2/repository"
     }
 
     stages {
         stage('Check Environment') {
             steps {
-                sh 'printenv | grep PATH'
+                sh 'echo $PATH'
                 sh 'mvn --version'
             }
         }
+
         stage('Clone Repository') {
             steps {
                 git branch: 'ahmed2', url: 'https://github.com/zankech/project.git'
             }
         }
+
         stage('Build') {
             steps {
                 sh 'mvn clean package'
             }
         }
+
         stage('Test') {
             steps {
                 sh 'mvn test'
             }
         }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying application...'
@@ -42,6 +43,7 @@ pipeline {
         success {
             echo 'Pipeline succeeded!'
         }
+
         failure {
             echo 'Pipeline failed!'
         }
