@@ -29,6 +29,7 @@ public class Operator implements Serializable{
 	String fname;
 	String vv;
 	String test;
+	String test2;
 	String lname;
 	String password;
 	@OneToMany
