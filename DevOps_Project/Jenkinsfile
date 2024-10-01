@@ -3,44 +3,52 @@ pipeline {
 
     environment {
         M2_HOME = "/usr/share/maven"
-        PATH = "${M2_HOME}/bin:${env.PATH}" // Correct syntax for appending M2_HOME to PATH
+        PATH = "${M2_HOME}/bin:${env.PATH}" // Correctly append Maven to the PATH
         HOME = "/var/lib/jenkins"
         MAVEN_OPTS = "-Dmaven.repo.local=/var/lib/jenkins/.m2/repository"
     }
-    stage('Check Environment') {
-    steps {
-        sh 'printenv | grep PATH'
-        sh 'mvn --version'
-    }
-}
 
     stages {
+        stage('Check Environment') {
+            steps {
+                // Debugging step to check the PATH and Maven configuration
+                sh 'printenv | grep PATH'
+                sh 'mvn --version'
+            }
+        }
         stage('Clone Repository') {
             steps {
+                // Clone the Git repository
                 git branch: 'ahmed2', url: 'https://github.com/zankech/project.git'
             }
         }
         stage('Build') {
             steps {
+                // Build the project using Maven
                 sh 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
+                // Run tests using Maven
                 sh 'mvn test'
             }
         }
         stage('Deploy') {
             steps {
+                // Placeholder for deployment steps
                 echo 'Deploying application...'
             }
         }
     }
+
     post {
         success {
+            // Actions to take upon success
             echo 'Pipeline succeeded!'
         }
         failure {
+            // Actions to take upon failure
             echo 'Pipeline failed!'
         }
     }
