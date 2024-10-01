@@ -7,6 +7,12 @@ pipeline {
         HOME = "/var/lib/jenkins"
         MAVEN_OPTS = "-Dmaven.repo.local=/var/lib/jenkins/.m2/repository"
     }
+    stage('Check Environment') {
+    steps {
+        sh 'printenv | grep PATH'
+        sh 'mvn --version'
+    }
+}
 
     stages {
         stage('Clone Repository') {
