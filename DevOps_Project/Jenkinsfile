@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         M2_HOME = "/usr/share/maven"
-        PATH+EXTRA = "${M2_HOME}/bin" // Ensure Maven is appended to PATH correctly
+        PATH = "${M2_HOME}/bin:${env.PATH}" // Correct syntax for appending M2_HOME to PATH
         HOME = "/var/lib/jenkins"
         MAVEN_OPTS = "-Dmaven.repo.local=/var/lib/jenkins/.m2/repository"
     }
