@@ -29,6 +29,7 @@ public class Operator implements Serializable{
 	String fname;
 	String lname;
 	String password;
+	String test;
 	@OneToMany
 	@JsonIgnore
 	Set<Invoice> invoices;
