@@ -3,15 +3,14 @@ pipeline {
     
     environment {
         // Set the Maven home and append it to the PATH variable
-        MAVEN_HOME = "/usr/share/maven"
-        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
+        M2_HOME = "/usr/share/maven"
+        PATH = "${M2_HOME}/bin:${env.PATH}"
     }
-    
     stages {
         stage('Clone Repository') {
             steps {
                 // Clone the Git repository
-                git branch: 'main', url: 'https://github.com/zankech/project.git'
+                git branch: 'ahmed2', url: 'https://github.com/zankech/project.git'
             }
         }
         stage('Build') {
