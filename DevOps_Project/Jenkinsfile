@@ -32,6 +32,7 @@ pipeline {
             steps {
                 // Placeholder for deployment steps
                 echo 'Deploying application...'
+
             }
         }
     }
