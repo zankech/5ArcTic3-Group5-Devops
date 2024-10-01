@@ -20,6 +20,7 @@ public class Product implements Serializable {
     String title;
     float price;
     int quantity;
+     int quantity1;
     @Enumerated(EnumType.STRING)
     ProductCategory category;
     @ManyToOne
