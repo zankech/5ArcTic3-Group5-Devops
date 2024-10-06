@@ -1,12 +1,14 @@
 pipeline {
-    agent any
+    agent any 
+    environment {
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        M2_HOME = '/usr/share/maven'
+        PATH = "${M2_HOME}/bin:${PATH}"
+    }
     stages {
-        stage('Check Maven Version') {
+        stage('Run Maven Version') {
             steps {
-                script {
-                    env.JENKINS_CI = 'true'
-                    sh 'mvn -v'
-                }
+                sh 'mvn -v'
             }
         }
     }
