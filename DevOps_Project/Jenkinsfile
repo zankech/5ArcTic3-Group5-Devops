@@ -4,7 +4,7 @@ pipeline {
             stage('Checkout') {
             steps {
               git branch: 'ahmed2',
-              url: "https://github.com/devopsgroup24-25/devops-24-25.git"
+              url: "https://github.com/zankech/project.git"
             }
         }
 
