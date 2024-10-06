@@ -5,11 +5,21 @@ pipeline {
         M2_HOME = '/usr/share/maven'
         PATH = "${M2_HOME}/bin:${PATH}"
     }
-    stages {
-        stage('Run Maven Version') {
+stages {
+            stage('Checkout') {
             steps {
-                sh 'mvn -v'
+              git branch: 'ahmed2',
+              url: "https://github.com/zankech/project.git"
+            }
+        }
+
+    stage('Build') {
+        steps {
+            dir('DevOps_Project') {
+                sh 'mvn clean package'
             }
         }
     }
-} 
+
+        }
+}
