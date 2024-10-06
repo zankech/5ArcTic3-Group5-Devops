@@ -1,10 +1,56 @@
 pipeline {
     agent any
+
+    environment {
+        // Set the JAVA_HOME and MAVEN_HOME paths if needed
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk-amd64'
+        M2_HOME = '/usr/share/maven'
+        PATH = "${M2_HOME}/bin:${JAVA_HOME}/bin:${env.PATH}"
+    }
+
     stages {
-        stage('Check Shell') {
+        stage('Checkout SCM') {
             steps {
-                sh 'which sh'
+                // Checkout the repository
+                git branch: 'ahmed2', url: 'https://github.com/zankech/project.git'
             }
+        }
+        
+        stage('Build') {
+            steps {
+                // Compile and build the project
+                sh 'mvn clean install'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Run tests
+                sh 'mvn test'
+            }
+        }
+        
+        stage('Deploy') {
+            when {
+                // Deploy only on the 'main' branch
+                branch 'main'
+            }
+            steps {
+                // Deployment steps can be added here
+                echo 'Deploying application...'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and test stages completed successfully!'
+        }
+        failure {
+            echo 'Build failed! Check the logs.'
+        }
+        always {
+            cleanWs() // Clean workspace after every build
         }
     }
 }
