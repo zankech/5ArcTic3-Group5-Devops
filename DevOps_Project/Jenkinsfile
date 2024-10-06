@@ -1,18 +1,10 @@
 pipeline {
     agent any
     stages {
-            stage('Checkout') {
+        stage('Check Shell') {
             steps {
-              git branch: 'ahmed2',
-              url: "https://github.com/zankech/project.git"
+                sh 'which sh'
             }
         }
-
-    stage('Build') {
-        steps {
-                sh 'mvn clean package'
-        }
     }
-
-        }
 }
