@@ -1,51 +1,20 @@
 pipeline {
     agent any
-
-    environment {
-        M2_HOME = "/usr/share/maven"
-        PATH = "${M2_HOME}/bin:${env.PATH}"
-    }
-
     stages {
-        stage('Check Environment') {
+            stage('Checkout') {
             steps {
-                sh 'echo $PATH'
-                sh 'mvn --version'
+              git branch: 'ahmed2',
+              url: "https://github.com/devopsgroup24-25/devops-24-25.git"
             }
         }
 
-        stage('Clone Repository') {
-            steps {
-                git branch: 'ahmed2', url: 'https://github.com/zankech/project.git'
-            }
-        }
-
-        stage('Build') {
-            steps {
+    stage('Build') {
+        steps {
+            dir('DevOps_Project') {
                 sh 'mvn clean package'
             }
         }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-            }
-        }
     }
 
-    post {
-        success {
-            echo 'Pipeline succeeded!'
         }
-
-        failure {
-            echo 'Pipeline failed!'
-        }
-    }
 }
