@@ -4,7 +4,8 @@ pipeline {
         stage('Check Maven Version') {
             steps {
                 script {
-                    sh '/usr/share/maven/bin/mvn -v'
+                    env.JENKINS_CI = 'true'
+                    sh 'mvn -v'
                 }
             }
         }
