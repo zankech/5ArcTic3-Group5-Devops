@@ -1,19 +1,16 @@
 pipeline {
     agent any
-
+    environment {
+        MAVEN_HOME = '/usr/share/maven'
+        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
+    }
     stages {
         stage('Check Maven Version') {
             steps {
-                // Display the Maven version
-                sh 'mvn -v'
+                script {
+                    sh 'mvn -v'
+                }
             }
         }
     }
-
-    post {
-        always {
-            cleanWs() // Clean workspace after the build
-        }
-    }
 }
- 
