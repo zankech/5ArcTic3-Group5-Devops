@@ -15,6 +15,13 @@ pipeline {
                 git branch: 'ahmed2', url: 'https://github.com/zankech/project.git'
             }
         }
+        stage('Check Versions') {
+            steps {
+               sh 'echo "Java version: $(java -version)"'
+               sh 'echo "Maven version: $(mvn -v)"'
+      }
+  }
+
         
         stage('Build') {
             steps {
