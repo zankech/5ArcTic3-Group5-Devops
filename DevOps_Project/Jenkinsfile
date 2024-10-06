@@ -1,22 +1,18 @@
 pipeline {
     agent any
-    stages {
-            stage('Checkout') {
-            steps {
-              git branch: 'ahmed2',
-              url: "https://github.com/zankech/project.git"
-            }
-        }
 
-    stage('Build') {
-        steps {
-            dir('DevOps_Project') {
-                sh 'mvn clean package'
+    stages {
+        stage('Check Maven Version') {
+            steps {
+                // Display the Maven version
+                sh 'mvn -v'
             }
         }
     }
 
+    post {
+        always {
+            cleanWs() // Clean workspace after the build
         }
+    }
 }
-  
- 
