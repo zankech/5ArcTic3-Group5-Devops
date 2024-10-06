@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'koussay1',
+                git branch: 'ahmed2',
                 url: "https://github.com/zankech/project.git"
             }
         }
