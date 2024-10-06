@@ -1,4 +1,5 @@
 pipeline {
+
     agent any
 
     environment {
@@ -42,4 +43,5 @@ pipeline {
             echo 'Pipeline failed!'
         }
     }
+
 }
