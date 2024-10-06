@@ -1,47 +1,27 @@
 pipeline {
-
     agent any
 
     environment {
-        // Append Maven to the PATH environment variable
-        PATH+EXTRA = "/usr/share/maven/bin"
+        M2_HOME = "/usr/share/maven"
+        JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
+        // Ensure the PATH is set correctly without duplication
+        PATH = "${M2_HOME}/bin:${JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                // Clone the Git repository
-                git branch: 'ahmed2', url: 'https://github.com/zankech/project.git'
+                git branch: 'koussay1',
+                url: "https://github.com/zankech/project.git"
             }
         }
+
         stage('Build') {
             steps {
-                // Build the project using Maven
-                sh 'mvn clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                // Run tests using Maven
-                sh 'mvn test'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                // Placeholder for deployment steps
-                echo 'Deploying application...'
+                dir('DevOps_Project') {
+                    sh 'mvn clean package'
+                }
             }
         }
     }
-    post {
-        success {
-            // Actions to take upon success
-            echo 'Pipeline succeeded!'
-        }
-        failure {
-            // Actions to take upon failure
-            echo 'Pipeline failed!'
-        }
-    }
-
 }
