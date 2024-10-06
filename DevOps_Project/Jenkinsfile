@@ -10,7 +10,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone the Git repository
-                git branch: 'main', url: 'https://github.com/zankech/project.git'
+                git branch: 'ahmed2', url: 'https://github.com/zankech/project.git'
             }
         }
         stage('Build') {
