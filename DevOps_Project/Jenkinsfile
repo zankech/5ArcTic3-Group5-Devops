@@ -3,7 +3,7 @@ pipeline {
     stages {
             stage('Checkout') {
             steps {
-              git branch: 'nouhe',
+              git branch: 'ahmed2',
               url: "https://github.com/zankech/project.git"
             }
         }
