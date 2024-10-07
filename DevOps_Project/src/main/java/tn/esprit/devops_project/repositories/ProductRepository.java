@@ -10,4 +10,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByCategory(ProductCategory category);
     List<Product> findByStockIdStock(Long idStock);
+
+    // Récupérer tous les produits avec une remise supérieure à 0
+    List<Product> findByDiscountGreaterThan(float discount);
 }

@@ -14,16 +14,22 @@ import java.io.Serializable;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long idProduct;
+
     String title;
     float price;
     int quantity;
-     int quantity1;
+
     @Enumerated(EnumType.STRING)
     ProductCategory category;
+
     @ManyToOne
     @JsonIgnore
     Stock stock;
+
+    // Nouveau champ pour la remise
+    float discount = 0;  // Par défaut à 0, c'est-à-dire pas de remise
 }

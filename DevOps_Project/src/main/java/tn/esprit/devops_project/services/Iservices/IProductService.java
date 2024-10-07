@@ -14,5 +14,7 @@ public interface IProductService {
     void deleteProduct(Long id);
     List<Product> retreiveProductStock(Long id);
 
-
+    // Ajouter les deux méthodes nécessaires
+    Product applyDiscount(Long productId, float discountPercentage);  // Appliquer une remise sur un produit
+    List<Product> getProductsOnDiscount();  // Gérer les produits en remise
 }

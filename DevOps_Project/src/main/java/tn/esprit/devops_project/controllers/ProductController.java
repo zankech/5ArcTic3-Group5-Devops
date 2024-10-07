@@ -16,31 +16,42 @@ public class ProductController {
     private final IProductService productService;
 
     @PostMapping("/product/{idStock}")
-    Product addProduct(@RequestBody Product product,@PathVariable Long idStock){
-        return productService.addProduct(product,idStock);
+    Product addProduct(@RequestBody Product product, @PathVariable Long idStock) {
+        return productService.addProduct(product, idStock);
     }
 
     @GetMapping("/product/{id}")
-    Product retrieveProduct(@PathVariable Long id){
+    Product retrieveProduct(@PathVariable Long id) {
         return productService.retrieveProduct(id);
     }
 
     @GetMapping("/product")
-    List<Product> retreiveAllProduct(){
+    List<Product> retreiveAllProduct() {
         return productService.retreiveAllProduct();
     }
+
     @GetMapping("/product/stock/{id}")
-    List<Product> retreiveProductStock(@PathVariable Long id){
+    List<Product> retreiveProductStock(@PathVariable Long id) {
         return productService.retreiveProductStock(id);
     }
 
-    @GetMapping("/productCategoy/{category}")
-    List<Product> retrieveProductByCategory(@PathVariable ProductCategory category){
+    @GetMapping("/productCategory/{category}")
+    List<Product> retrieveProductByCategory(@PathVariable ProductCategory category) {
         return productService.retrieveProductByCategory(category);
     }
 
     @DeleteMapping("/product/{id}")
-    void deleteProduct(@PathVariable Long id){
+    void deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
+    }
+
+    @GetMapping("/discounted")
+    public List<Product> getDiscountedProducts() {
+        return productService.getProductsOnDiscount();
+    }
+
+    @PostMapping("/product/discount/{id}")
+    public Product applyDiscount(@PathVariable Long id, @RequestParam float discountPercentage) {
+        return productService.applyDiscount(id, discountPercentage);
     }
 }

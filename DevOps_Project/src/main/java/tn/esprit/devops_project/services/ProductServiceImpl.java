@@ -17,19 +17,34 @@ import java.util.List;
 @Slf4j
 public class ProductServiceImpl implements IProductService {
 
-   final ProductRepository productRepository;
-   final StockRepository stockRepository;
+    final ProductRepository productRepository;
+    final StockRepository stockRepository;
+
+    @Override
+    public Product applyDiscount(Long productId, float discountPercentage) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new NullPointerException("Product not found"));
+
+        if (discountPercentage < 0 || discountPercentage > 100) {
+            throw new IllegalArgumentException("Invalid discount percentage");
+        }
+
+        product.setDiscount(discountPercentage);
+        return productRepository.save(product);
+    }
 
     @Override
     public Product addProduct(Product product, Long idStock) {
-        Stock stock = stockRepository.findById(idStock).orElseThrow(() -> new NullPointerException("stock not found"));
+        Stock stock = stockRepository.findById(idStock)
+                .orElseThrow(() -> new NullPointerException("Stock not found"));
         product.setStock(stock);
         return productRepository.save(product);
     }
 
     @Override
     public Product retrieveProduct(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new NullPointerException("Product not found"));
+        return productRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Product not found"));
     }
 
     @Override
@@ -51,5 +66,9 @@ public class ProductServiceImpl implements IProductService {
     public List<Product> retreiveProductStock(Long id) {
         return productRepository.findByStockIdStock(id);
     }
+
+    @Override
+    public List<Product> getProductsOnDiscount() {
+        return productRepository.findByDiscountGreaterThan(0);
+    }
 }
-// aaaa
