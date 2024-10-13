@@ -41,4 +41,4 @@ public class Invoice implements Serializable {
     Supplier supplier;
 
 	
-}
+} 
