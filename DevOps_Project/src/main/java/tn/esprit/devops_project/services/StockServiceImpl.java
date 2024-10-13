@@ -29,6 +29,15 @@ public class StockServiceImpl implements IStockService {
         return stockRepository.findAll();
     }
 
+    @Override
+    public double calculateTotalStockValue(Long stockId) {
+        Stock stock = retrieveStock(stockId);  // Récupération du stock
+
+        // Calculer la valeur totale des produits du stock
+        return stock.getProducts().stream()
+                .mapToDouble(product -> product.getPrice() * product.getQuantity())
+                .sum();
+    }
 
 
 }

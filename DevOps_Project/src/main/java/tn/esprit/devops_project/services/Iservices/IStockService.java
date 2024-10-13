@@ -9,5 +9,6 @@ public interface IStockService {
     Stock addStock(Stock stock);
     Stock retrieveStock(Long id);
     List<Stock> retrieveAllStock();
+    double calculateTotalStockValue(Long stockId);
 
 }

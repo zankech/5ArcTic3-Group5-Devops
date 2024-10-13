@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    environment {
+        M2_HOME = "/opt/apache-maven"
+        JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
+        PATH = "${M2_HOME}/bin:${JAVA_HOME}/bin:${env.PATH}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'koussay1',
+                url: "https://github.com/zankech/project.git"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('DevOps_Project') {
+                    sh 'mvn clean package'
+                }
+            }
+        }
+    }
+}
