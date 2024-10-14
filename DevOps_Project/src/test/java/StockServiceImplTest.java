@@ -46,7 +46,7 @@ public class StockServiceImplTest {
                 .build();
 
         // Ajouter les produits au stock
-        Set<Product> products = new HashSet<>();
+        Set<Product> products = new HashSet<>(); 
         products.add(product1);
         products.add(product2);
 
