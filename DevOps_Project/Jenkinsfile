@@ -13,7 +13,7 @@ pipeline {
             steps {
                 git branch: 'HosniHoussem-5ArTic3-Group5',
                 url: "https://github.com/zankech/project.git"
-            }
+            } 
         }
 
         stage('Build') {
