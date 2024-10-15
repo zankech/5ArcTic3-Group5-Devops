@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
+                git branch: 'HosniHoussem-5ArTic3-Group5',
                 url: "https://github.com/zankech/project.git"
             }
         }
