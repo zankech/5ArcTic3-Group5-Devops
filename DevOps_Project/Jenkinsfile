@@ -4,8 +4,8 @@ pipeline {
     environment {
         M2_HOME = "/usr/share/maven"
         JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
-        // Ensure the PATH is set correctly without duplication
         PATH = "${M2_HOME}/bin:${JAVA_HOME}/bin:${env.PATH}"
+        IMAGE_NAME = "ahmed9696/ahmedchouchene_5arctic3gp5_devops_projec"
     }
 
     stages {
@@ -20,6 +20,27 @@ pipeline {
             steps {
                 dir('DevOps_Project') {
                     sh 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .'
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh """
+                            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                            docker push ${IMAGE_NAME}:${BUILD_NUMBER}
+                        """
+                    }
                 }
             }
         }
