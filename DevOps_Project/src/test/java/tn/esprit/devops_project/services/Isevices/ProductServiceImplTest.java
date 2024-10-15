@@ -36,7 +36,7 @@ class ProductServiceImplTest {
         product.setDiscount(0);
 
         // Act
-        product.setDiscount(20.0f); // Simuler l'application de la remise
+        product.setDiscount(20.0f); // remise traja3 mrigula walla le
 
         // Assert
         assertEquals(20.0f, product.getDiscount(), "La remise devrait être de 20%");
@@ -45,7 +45,7 @@ class ProductServiceImplTest {
     @Test
     void testShouldThrowExceptionWhenInvalidDiscountPercentage() {
         // Arrange
-        float invalidDiscountPercentage = -10.0f; // Pourcentage invalide
+        float invalidDiscountPercentage = -10.0f; // Pourcentage mehech mrigulaa
 
         // Act & Assert
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -65,7 +65,7 @@ class ProductServiceImplTest {
         float discountPercentage = 20.0f;
         Product product = new Product();
         product.setIdProduct(productId);
-        product.setDiscount(0); // Remise initiale
+        product.setDiscount(0); // Remise bdina bih
 
         when(productRepository.findById(productId)).thenReturn(Optional.of(product));
         when(productRepository.save(product)).thenReturn(product);
