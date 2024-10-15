@@ -6,24 +6,48 @@ pipeline {
         JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
         // Ensure the PATH is set correctly without duplication
         PATH = "${M2_HOME}/bin:${JAVA_HOME}/bin:${env.PATH}"
+        IMAGE_NAME = "houssemhosni/hosnihoussem-5artic3-g5-devops"
     }
 
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'HosniHoussem-5ArTic3-Group5',
-                url: "https://github.com/zankech/project.git"
+                url: "https://github.com/zankech/5ArcTic3-Group5-Devops.git"
             } 
         }
 
         stage('Build') {
-            steps {
-                dir('DevOps_Project') {
-                    sh 'mvn clean package'
-                }
-            }
-        }   
-    }
-} 
- 
+                   steps {
+                       dir('DevOps_Project') {
+                           sh 'mvn clean package'
+                       }
+                   }
+               }
+
+               stage('Build Docker Image') {
+                   steps {
+                         dir('DevOps_Project') {
+                       script {
+                           sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .'
+                       }
+                       }
+                   }
+               }
+
+               stage('Push Docker Image') {
+                   steps {
+                       script {
+                           withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                               sh """
+                                   echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                                   docker push ${IMAGE_NAME}:${BUILD_NUMBER}
+                               """
+                           }
+                       }
+                   }
+               }
+           }
+       }
+
  
