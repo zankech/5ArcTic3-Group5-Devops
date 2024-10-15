@@ -11,8 +11,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'ahmed2',
-                url: "https://github.com/zankech/project.git"
+                git branch: 'AhmedChouchane-5ArcTic3-Group5',
+                url: "https://github.com/zankech/5ArcTic3-Group5-Devops.git"
             }
         }
 
